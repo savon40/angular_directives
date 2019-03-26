@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <button
+        class="btn btn-primary"
+        (click)="onlyOdd = !onlyOdd">Only show odd numbers</button>
+      <br><br>
+      <ul class="list-group">
+        <div *ngIf="onlyOdd">
+            <li class="list-group-item" [ngClass]="{odd: odd % 2 !== 0}" 
+              [ngStyle]="{backgroundColor: odd % 2 !== 0 ? 'yellow' : 'transparent'}"
+              *ngFor="let odd of oddNumbers">{{odd}}</li>              
+        </div>
+
+
+        <!-- <div *ngIf="!onlyOdd">
+          
+        </div> -->
+
+        <!-- ng template by itself is not rendered, but defines a template that we can use if it is needed -->
+        <!-- <ng-template [ngIf]="!onlyOdd">
+          <div>
+              <li class="list-group-item" [ngClass]="{odd: even % 2 == 0}" 
+                [ngStyle]="{backgroundColor: even % 2 == 0 ? 'yellow' : 'transparent'}"
+                *ngFor="let even of evenNumbers">{{even}}</li>
+          </div>
+        </ng-template> -->
+
+        <div *appUnless="onlyOdd">
+            <li class="list-group-item" [ngClass]="{odd: even % 2 == 0}" 
+              [ngStyle]="{backgroundColor: even % 2 == 0 ? 'yellow' : 'transparent'}"
+              *ngFor="let even of evenNumbers">{{even}}</li>
+        </div>
+
+      </ul>
+      <p appBasicHighlight>Style with basic directive</p>
+      <p appBetterHighlight [defaultColor]="'yellow'" [highlightColor]="'red'">Style with better directive</p>
+      
+      <!-- this is like a switch statement instead of if -->
+      <div [ngSwitch]="value">
+        <p *ngSwitchCase="5">Value is 5</p>
+        <p *ngSwitchCase="10">Value is 10</p>
+        <p *ngSwitchCase="20">Value is 20</p>
+        <p *ngSwitchCase="30">Value is 30</p>
+        <p *ngSwitchDefault>Value is Default</p>
+      </div>
+    </div>
+  </div>
+</div>
